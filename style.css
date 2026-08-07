@@ -4,108 +4,137 @@
     box-sizing: border-box;
 }
 
+
 body {
-    height: 100vh;
-    overflow: hidden;
     background: black;
-    font-family: "Poppins", sans-serif;
+    overflow: hidden;
 }
+
 
 .player {
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 
-/* foto utama */
 #photo {
     width: 100%;
     height: 100%;
     object-fit: cover;
+
     position: absolute;
+
+    transition: opacity 1s ease, transform 8s ease;
     animation: zoom 8s infinite alternate;
 }
 
 
-/* lapisan gelap */
 .player::after {
+
     content: "";
+
     position: absolute;
     inset: 0;
+
     background: linear-gradient(
         to top,
         rgba(0,0,0,0.8),
-        transparent 60%
+        rgba(0,0,0,0.1)
     );
+
 }
 
 
-/* lirik */
 .overlay {
+
     position: absolute;
+
     z-index: 2;
+
     bottom: 15%;
-    width: 90%;
+
+    width: 100%;
+
     text-align: center;
+
 }
 
 
 #lyric {
-    color: white;
-    font-size: 28px;
-    font-weight: 600;
-    text-shadow: 0 0 15px black;
-    animation: fade 1s;
+
+    color:white;
+
+    font-size: 26px;
+
+    font-family: Arial, sans-serif;
+
+    font-weight: bold;
+
+    padding: 0 30px;
+
+    text-shadow:
+    0 0 10px black,
+    0 0 20px black;
+
+    animation: muncul 1s;
+
 }
 
 
-/* tombol */
 #startButton {
-    position: absolute;
-    z-index: 3;
-    padding: 15px 35px;
-    border-radius: 50px;
-    border: none;
-    background: white;
-    color: black;
-    font-size: 18px;
-    cursor: pointer;
+
+    position:absolute;
+
+    z-index:3;
+
+    top:50%;
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+
+    padding:15px 35px;
+
+    border:none;
+
+    border-radius:50px;
+
+    font-size:18px;
+
+    cursor:pointer;
+
 }
 
 
-#startButton:hover {
-    transform: scale(1.1);
-}
 
-
-/* animasi foto */
 @keyframes zoom {
 
     from {
-        transform: scale(1);
+        transform:scale(1);
     }
 
     to {
-        transform: scale(1.1);
+        transform:scale(1.08);
     }
 
 }
 
 
-@keyframes fade {
+@keyframes muncul {
 
     from {
-        opacity: 0;
-        transform: translateY(20px);
+
+        opacity:0;
+        transform:translateY(20px);
+
     }
 
     to {
-        opacity: 1;
-        transform: translateY(0);
+
+        opacity:1;
+        transform:translateY(0);
+
     }
 
 }

@@ -19,14 +19,27 @@ body {
 
 
 #photo {
-    width: 100%;
-    height: 100%;
+
+    width: 75%;
+    height: 75%;
+
     object-fit: cover;
 
     position: absolute;
 
-    transition: opacity 1s ease, transform 8s ease;
-    animation: zoom 8s infinite alternate;
+    border-radius: 15px;
+
+    border: 10px solid white;
+
+    box-shadow:
+    0 20px 50px rgba(0,0,0,0.7);
+
+
+    opacity: 0;
+
+    transform: translateX(100px) rotate(3deg);
+
+    transition: all 1s ease;
 }
 
 
@@ -138,3 +151,53 @@ body {
     }
 
 }
+#photo.slide {
+
+    opacity:1;
+
+    transform:
+    translateX(0)
+    rotate(0deg);
+
+}
+
+
+
+#photo.slide:hover {
+
+    transform:
+    scale(1.03);
+
+}
+
+
+
+#lyric.show {
+
+    animation:
+    lyricIn 1s ease;
+
+}
+
+
+
+@keyframes lyricIn {
+
+    from {
+
+        opacity:0;
+
+        transform:
+        translateY(40px);
+
+    }
+
+
+    to {
+
+        opacity:1;
+
+        transform:
+        translateY(0);
+
+    }

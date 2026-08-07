@@ -1,203 +1,290 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+
+margin:0;
+padding:0;
+box-sizing:border-box;
+
 }
+
 
 
 body {
-    background: black;
-    overflow: hidden;
+
+height:100vh;
+overflow:hidden;
+background:black;
+font-family:Arial,sans-serif;
+
 }
+
 
 
 .player {
-    width: 100vw;
-    height: 100vh;
-    position: relative;
+
+height:100vh;
+width:100vw;
+position:relative;
+
 }
+
+
+
+/* BACKGROUND */
+
+.background {
+
+position:absolute;
+inset:-40px;
+
+background:url("assets/bg.jpg");
+
+background-size:cover;
+background-position:center;
+
+
+filter:
+blur(20px)
+brightness(.45);
+
+
+transform:scale(1.2);
+
+}
+
+
+
+/* POLAROID */
+
+.photo-card {
+
+position:absolute;
+
+width:360px;
+
+padding:15px 15px 40px;
+
+
+background:#fff;
+
+
+top:45%;
+left:50%;
+
+
+transform:
+translate(-50%,-50%)
+rotate(-5deg);
+
+
+box-shadow:
+0 25px 60px black;
+
+
+z-index:2;
+
+
+animation:
+float 5s infinite alternate;
+
+}
+
 
 
 #photo {
 
-    width: 75%;
-    height: 75%;
+width:100%;
 
-    object-fit: cover;
+height:430px;
 
-    position: absolute;
-
-    border-radius: 15px;
-
-    border: 10px solid white;
-
-    box-shadow:
-    0 20px 50px rgba(0,0,0,0.7);
-
-
-    opacity: 0;
-
-    transform: translateX(100px) rotate(3deg);
-
-    transition: all 1s ease;
-}
-
-
-.player::after {
-
-    content: "";
-
-    position: absolute;
-    inset: 0;
-
-    background: linear-gradient(
-        to top,
-        rgba(0,0,0,0.8),
-        rgba(0,0,0,0.1)
-    );
+object-fit:cover;
 
 }
 
 
-.overlay {
 
-    position: absolute;
+@keyframes float {
 
-    z-index: 2;
 
-    bottom: 15%;
+from {
 
-    width: 100%;
-
-    text-align: center;
+transform:
+translate(-50%,-50%)
+rotate(-5deg);
 
 }
+
+
+to {
+
+transform:
+translate(-50%,-54%)
+rotate(5deg);
+
+}
+
+
+}
+
+
+
+/* TRANSISI FOTO */
+
+
+.photo-card.change {
+
+
+animation:
+paperMove 1s;
+
+
+}
+
+
+
+@keyframes paperMove {
+
+
+0% {
+
+opacity:0;
+
+transform:
+
+translate(-100%,-40%)
+rotate(-30deg)
+scale(.7);
+
+}
+
+
+
+100% {
+
+
+opacity:1;
+
+
+transform:
+
+translate(-50%,-50%)
+rotate(-5deg)
+scale(1);
+
+
+}
+
+
+}
+
+
+
+/* LIRIK */
+
+
+.lyrics {
+
+
+position:absolute;
+
+bottom:12%;
+
+width:100%;
+
+
+text-align:center;
+
+
+z-index:3;
+
+padding:20px;
+
+}
+
 
 
 #lyric {
 
-    color:white;
 
-    font-size: 26px;
+color:white;
 
-    font-family: Arial, sans-serif;
+font-size:28px;
 
-    font-weight: bold;
+font-weight:bold;
 
-    padding: 0 30px;
 
-    text-shadow:
-    0 0 10px black,
-    0 0 20px black;
+text-shadow:
 
-    animation: muncul 1s;
+0 0 10px black,
+0 0 30px black;
+
+
+animation:
+textIn .8s;
+
 
 }
+
+
+
+@keyframes textIn {
+
+
+from {
+
+opacity:0;
+
+transform:
+translateY(30px);
+
+}
+
+
+to {
+
+opacity:1;
+
+transform:
+translateY(0);
+
+}
+
+
+}
+
+
+
+/* BUTTON */
 
 
 #startButton {
 
-    position:absolute;
 
-    z-index:3;
+position:absolute;
 
-    top:50%;
-    left:50%;
-
-    transform:translate(-50%,-50%);
+z-index:5;
 
 
-    padding:15px 35px;
+top:50%;
+left:50%;
 
-    border:none;
 
-    border-radius:50px;
+transform:
+translate(-50%,-50%);
 
-    font-size:18px;
 
-    cursor:pointer;
+
+padding:15px 40px;
+
+
+border:none;
+
+border-radius:50px;
+
+
+font-size:18px;
+
+
+cursor:pointer;
+
 
 }
-
-
-
-@keyframes zoom {
-
-    from {
-        transform:scale(1);
-    }
-
-    to {
-        transform:scale(1.08);
-    }
-
-}
-
-
-@keyframes muncul {
-
-    from {
-
-        opacity:0;
-        transform:translateY(20px);
-
-    }
-
-    to {
-
-        opacity:1;
-        transform:translateY(0);
-
-    }
-
-}
-#photo.slide {
-
-    opacity:1;
-
-    transform:
-    translateX(0)
-    rotate(0deg);
-
-}
-
-
-
-#photo.slide:hover {
-
-    transform:
-    scale(1.03);
-
-}
-
-
-
-#lyric.show {
-
-    animation:
-    lyricIn 1s ease;
-
-}
-
-
-
-@keyframes lyricIn {
-
-    from {
-
-        opacity:0;
-
-        transform:
-        translateY(40px);
-
-    }
-
-
-    to {
-
-        opacity:1;
-
-        transform:
-        translateY(0);
-
-    }

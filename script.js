@@ -1,82 +1,53 @@
-const music = document.getElementById("music");
-const startButton = document.getElementById("startButton");
-const photo = document.getElementById("photo");
-const lyric = document.getElementById("lyric");
-
-const scenes = [
-    {
-        start: 0,
-        image: "assets/foto1.jpg",
-        lyric: "oh, golden boy you shined a light on your home"
-    },
-    {
-        start: 5,
-        image: "assets/foto2.jpg",
-        lyric: "and at your best you were magic we were sold"
-    },
-    {
-        start: 9,
-        image: "assets/foto3.jpg",
-        lyric: "but dont tell 'em what you told me don't even tell 'em that you know me"
-    },
-    {
-        start: 14,
-        image: "assets/foto4.jpg",
-        lyric: "i would rather burn forever"
-    },
-    {
-        start: 18,
-        image: "assets/foto5.jpg",
-        lyric: "but you should know that i died slow"
-    },
-    {
-        start: 22,
-        image: "assets/foto6.jpg",
-        lyric: "running through the halls of your haunted home"
-    },
-    {
-        start: 26,
-        image: "assets/foto7.jpg",
-        lyric: "and the toughest part is that we both know"
-    },
-    {
-        start: 30,
-        image: "assets/foto8.jpg",
-        lyric: "what happened to you why you're out on your own"
-    },
-    {
-        start: 36,
-        image: "assets/foto9.jpg",
-        lyric: "merry christmas, please don't call"
-    }
+// Array Lirik + Timestamp (detik) + Foto
+const syncData = [
+  { time: 0, lyric: "🎵 (Intro Musik)", image: "assets/photo1.jpg" },
+  { time: 5, lyric: "Di suatu malam yang sunyi...", image: "assets/photo1.jpg" },
+  { time: 10, lyric: "Kutatap bintang di angkasa", image: "assets/photo2.jpg" },
+  { time: 16, lyric: "Mengingat senyummu yang indah", image: "assets/photo3.jpg" },
+  { time: 22, lyric: "Yang tak pernah pudar...", image: "assets/photo1.jpg" }
 ];
 
-let currentScene = -1;
+const audio = document.getElementById("audio-player");
+const lyricText = document.getElementById("lyric-text");
+const bgPhoto = document.getElementById("bg-photo");
 
-startButton.addEventListener("click", async () => {
-    try {
-        await music.play();
-        startButton.style.display = "none";
-    } catch (error) {
-        console.error("Audio gagal diputar:", error);
+let currentIndex = -1;
+
+// EventListener yang berjalan setiap detik audio berputar
+audio.addEventListener("timeupdate", () => {
+  const currentTime = audio.currentTime;
+
+  // Cari lirik mana yang cocok dengan detik sekarang
+  let activeIndex = -1;
+  for (let i = 0; i < syncData.length; i++) {
+    if (currentTime >= syncData[i].time) {
+      activeIndex = i;
+    } else {
+      break;
     }
+  }
+
+  // Jika waktu masuk ke baris lirik baru
+  if (activeIndex !== -1 && activeIndex !== currentIndex) {
+    currentIndex = activeIndex;
+    updateDisplay(syncData[currentIndex]);
+  }
 });
 
-music.addEventListener("timeupdate", () => {
-    const currentTime = music.currentTime;
+function updateDisplay(data) {
+  // Transisi Teks Lirik
+  lyricText.classList.add("lyric-fade");
+  
+  setTimeout(() => {
+    lyricText.textContent = data.lyric;
+    lyricText.classList.remove("lyric-fade");
+  }, 200);
 
-    let sceneIndex = -1;
-
-    for (let i = 0; i < scenes.length; i++) {
-        if (currentTime >= scenes[i].start) {
-            sceneIndex = i;
-        }
-    }
-
-    if (sceneIndex !== currentScene && sceneIndex !== -1) {
-        currentScene = sceneIndex;
-
-        photo.src = scenes[sceneIndex].image;
-        lyric.textContent = scenes[sceneIndex].lyric;
-    }
-});
+  // Transisi Foto Background
+  bgPhoto.style.backgroundImage = `url('${data.image}')`;
+  
+  // Reset animasi zoom lembut khas video editing
+  bgPhoto.classList.remove("zoom");
+  void bgPhoto.offsetWidth; // Force reflow JS
+  bgPhoto.classList.add("zoom");
+}

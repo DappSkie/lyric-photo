@@ -76,7 +76,20 @@ music.addEventListener("timeupdate", () => {
     if (sceneIndex !== currentScene && sceneIndex !== -1) {
         currentScene = sceneIndex;
 
-        photo.src = scenes[sceneIndex].image;
-        lyric.textContent = scenes[sceneIndex].lyric;
+        photo.classList.remove("slide");
+
+    void photo.offsetWidth;
+
+    photo.src = scenes[sceneIndex].image;
+
+    photo.classList.add("slide");
+
+    lyric.classList.remove("show");
+
+    void lyric.offsetWidth;
+
+    lyric.textContent = scenes[sceneIndex].lyric;
+
+    lyric.classList.add("show");
     }
 });

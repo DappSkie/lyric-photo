@@ -136,6 +136,8 @@ music.addEventListener("timeupdate", () => {
 
         card.classList.add("change");
 
+console.log("scene berubah", sceneIndex);
+
 
     }
 

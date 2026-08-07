@@ -6,6 +6,7 @@ const lyric = document.getElementById("lyric");
 const scenes = [
     {
         start: 0,
+        end  : 4,
         image: "assets/foto1.jpg",
         lyric: "oh, golden boy you shined a light on your home"
     },

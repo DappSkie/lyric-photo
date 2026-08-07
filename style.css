@@ -1,91 +1,59 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #000;
-  color: #fff;
-  height: 100vh;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    background: #000;
+    color: white;
+    font-family: Arial, sans-serif;
 }
 
-/* Container Background Foto dengan Efek Zoom Soft */
-.background-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
+.player {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
 }
 
-.bg-photo {
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  transition: background-image 0.8s ease-in-out, transform 8s ease-out;
-  transform: scale(1.05);
+#photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-.bg-photo.zoom {
-  transform: scale(1.15);
-}
-
-/* Dynamic Dark Overlay agar teks lirik selalu terbaca */
 .overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.45);
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 50px 25px;
+    background: linear-gradient(
+        transparent 40%,
+        rgba(0, 0, 0, 0.75)
+    );
 }
 
-/* Lirik & Kontrol */
-.content-container {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  width: 90%;
-  max-width: 800px;
+#lyric {
+    font-size: 22px;
+    text-align: center;
+    line-height: 1.5;
 }
 
-.lyrics-box {
-  min-height: 150px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 30px;
-}
+#startButton {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 
-#lyric-text {
-  font-size: 2rem;
-  font-weight: 700;
-  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
-  line-height: 1.4;
-  opacity: 1;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
+    padding: 14px 28px;
+    border: none;
+    border-radius: 30px;
 
-.lyric-fade {
-  opacity: 0;
-  transform: translateY(10px);
-}
-
-/* Aesthetic Audio Controller */
-.controls {
-  margin-top: 20px;
-}
-
-audio {
-  width: 100%;
-  max-width: 400px;
-  filter: invert(0.9) hue-rotate(180deg); /* Style gelap cepat untuk native player */
+    background: white;
+    color: black;
+    font-size: 16px;
+    cursor: pointer;
 }
